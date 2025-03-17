@@ -4,8 +4,14 @@
   </div>
 </template>
 
+<script setup>
+// Import CSS
+import './assets/css/main.css';
+</script>
+
 <style>
-body {
-  @apply bg-gray-50;
+/* Additional global styles */
+* {
+  direction: rtl;
 }
 </style>

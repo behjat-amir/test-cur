@@ -13,7 +13,7 @@
 
       <div class="glass-card p-8 md:p-12">
         <div class="text-center mb-10">
-          <h1 class="title inline-block animate-float">
+          <h1 class="title font-titr inline-block animate-float">
             <span class="flex items-center gap-3 justify-center">
               <div class="h-10 w-10 md:h-14 md:w-14 relative">
                 <div class="absolute inset-0 bg-primary-500 rounded-full opacity-20 animate-ping"></div>
@@ -68,7 +68,7 @@
                 <input 
                   type="text" 
                   id="join-username" 
-                  v-model="username" 
+                  v-model="joinUsername" 
                   class="input" 
                   placeholder="نام خود را وارد کنید"
                 />
@@ -83,7 +83,7 @@
                   placeholder="کد اتاق را وارد کنید"
                 />
               </div>
-              <button @click="joinRoom" class="btn-secondary w-full flex items-center justify-center gap-2">
+              <button @click="joinExistingRoom" class="btn-secondary w-full flex items-center justify-center gap-2">
                 <span>پیوستن به اتاق</span>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
@@ -107,6 +107,7 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const username = ref('')
+const joinUsername = ref('')
 const roomId = ref('')
 
 const createRoom = () => {
@@ -117,11 +118,11 @@ const createRoom = () => {
   
   // اتاق جدید به صورت کد تصادفی
   roomId.value = Math.random().toString(36).substring(2, 8)
-  joinRoom()
+  joinRoom(username.value)
 }
 
-const joinRoom = () => {
-  if (!username.value) {
+const joinExistingRoom = () => {
+  if (!joinUsername.value) {
     alert('لطفاً یک نام کاربری وارد کنید')
     return
   }
@@ -131,7 +132,11 @@ const joinRoom = () => {
     return
   }
   
-  localStorage.setItem('username', username.value)
+  joinRoom(joinUsername.value)
+}
+
+const joinRoom = (userNameToUse) => {
+  localStorage.setItem('username', userNameToUse)
   router.push(`/game/${roomId.value}`)
 }
 </script>

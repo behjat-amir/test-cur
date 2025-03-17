@@ -1,6 +1,6 @@
 <template>
   <div class="game-container">
-    <div class="glass-card p-6 relative overflow-hidden">
+    <div class="game-card p-6 relative overflow-hidden">
       <!-- زمینه متحرک -->
       <div class="absolute inset-0 -z-10 overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-br from-primary-900/30 via-gray-900 to-secondary-900/30"></div>
@@ -51,7 +51,7 @@
           ref="chatBox"
           :is-drawer="isDrawer"
           @guess="handleGuess"
-          class="glass-card"
+          class="chat-box-container"
         />
       </div>
     </div>
@@ -351,7 +351,7 @@ onUnmounted(() => {
 .round-end-content,
 .new-round-content,
 .times-up-content {
-  @apply glass-card p-8 text-center max-w-md w-full mx-4;
+  @apply bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-xl p-8 text-center max-w-md w-full mx-4;
 }
 
 .round-end-content h2,
@@ -428,5 +428,13 @@ onUnmounted(() => {
   .game-content {
     grid-template-rows: 400px 1fr;
   }
+}
+
+.game-card {
+  @apply bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-xl;
+}
+
+.chat-box-container {
+  @apply bg-gray-800/80 backdrop-blur-sm border border-gray-700 rounded-2xl shadow-xl;
 }
 </style> 
